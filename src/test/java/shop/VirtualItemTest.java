@@ -1,30 +1,22 @@
 package shop;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 class VirtualItemTest {
 
+    private VirtualItem virtualItem;
+    private static final String EXPECTED_RESULT = "Class: class shop.VirtualItem; Name: someItem; Price: 123.0; Size on disk: 11.1";
+
     @BeforeEach
-    void showTestStart(){
-        System.out.println("Test starts");
+    void initialiazeVirtualItem() {
+        virtualItem = new VirtualItem();
+        virtualItem.setName("someItem");
+        virtualItem.setPrice(123);
+        virtualItem.setSizeOnDisk(11.1);
     }
 
     @Test
-    void SizeOnDiskIsNotZeroOnceSet() {
-        System.out.println("===========");
-        System.out.println("Test runs");
-        VirtualItem virtualItem = new VirtualItem();
-        virtualItem.setSizeOnDisk(11.1);
-        Assertions.assertFalse(virtualItem.getSizeOnDisk() == 0.0);
+    void testVirtualItem() {
+        Assertions.assertTrue(EXPECTED_RESULT.equals(virtualItem.toString()));
     }
-
-    @AfterEach
-    void showTestEnd(){
-        System.out.println("===========");
-        System.out.println("Test ends");
-    }
-
 }

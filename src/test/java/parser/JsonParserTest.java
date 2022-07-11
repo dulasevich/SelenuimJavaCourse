@@ -12,53 +12,49 @@ import java.nio.file.Paths;
 
 class JsonParserTest {
 
-    String cartName;
+    private final static String EXPECTED_RESULT = "{\"cartName\":\"Test\",\"realItems\":[],\"virtualItems\":[],\"total\":0.0}";
     JsonParser jsonParser;
+    Cart cart;
 
     @BeforeEach
-     void initializeCartNameAndJsonParser(){
-        cartName = "UnitTest";
+    void initializeCart() {
         jsonParser = new JsonParser();
+        cart = new Cart("Test");
     }
 
     @ParameterizedTest()
     @ValueSource(strings = {"andrew-cart", "pavel-cart", "alex-cart", "eugen-cart", "viktor-cart"})
-    void VerifyFileNameAndFormatAreValid(String name) {
-        cartName = name;
+    void testNoSuchFileException(String name) {
         Assertions.assertThrows(NoSuchFileException.class, () -> {
-            jsonParser.readFromFile(new File("src/main/resources/" + cartName + ".json"));
+            jsonParser.readFromFile(new File("src/main/resources/" + name + ".json"));
         });
     }
 
     @Disabled
     @Test
-    void checkIfNoExceptionDuringWritingData() {
-        Cart cart = new Cart(cartName);
-        Assertions.assertDoesNotThrow( () -> jsonParser.writeToFile(cart));
+    void testWriteToFile() throws IOException {
+        jsonParser.writeToFile(cart);
+        String actualResult = Files.readString(Paths.get("src/main/resources/" + cart.getCartName() + ".json"));
+        Assertions.assertEquals(EXPECTED_RESULT, actualResult);
     }
 
     @Test
-    void checkIfFileIsCreated() {
-        Cart cart = new Cart(cartName);
-        jsonParser.writeToFile(cart);
-        Assertions.assertTrue(Files.exists(Paths.get("src/main/resources/" + cart.getCartName() + ".json")));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"andrew-cart", "eugen-cart"})
-    void checkIfReadFileMethodDoesNotReturnNull(String name){
-        cartName = name;
-        Assertions.assertNotNull(jsonParser.readFromFile(new File("src/main/resources/" + cartName + ".json")));
+    void testReadFromFile() {
+        Cart actualResult = jsonParser.readFromFile(new File("src/main/resources/andrew-cart.json"));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals("andrew-cart", actualResult.getCartName()),
+                () -> Assertions.assertEquals(38445.479999999996, actualResult.getTotalPrice())
+        );
     }
 
     @AfterEach
-    void deleteCreatedFileAfterTests(){
+    void deleteCreatedFile() {
         try {
-            if(cartName.equals("UnitTest")){
-                Files.delete(Paths.get("src/main/resources/" + cartName + ".json"));
+            if (cart.getCartName().equals("Test")) {
+                Files.delete(Paths.get("src/main/resources/" + cart.getCartName() + ".json"));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+
         }
     }
 }
