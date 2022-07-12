@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 class JsonParserTest {
 
     private final static String EXPECTED_RESULT = "{\"cartName\":\"Test\",\"realItems\":[],\"virtualItems\":[],\"total\":0.0}";
-    JsonParser jsonParser;
-    Cart cart;
+    private JsonParser jsonParser;
+    private Cart cart;
 
     @BeforeEach
     void initializeCart() {

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 class CartTest {
 
-    Cart cart;
-    RealItem realItem;
-    VirtualItem virtualItem;
+    private Cart cart;
+    private RealItem realItem;
+    private VirtualItem virtualItem;
 
     @BeforeEach
     void initializeCart() {

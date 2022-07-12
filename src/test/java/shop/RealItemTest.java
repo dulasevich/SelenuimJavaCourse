@@ -8,7 +8,7 @@ class RealItemTest {
     private static final String EXPECTED_RESULT = "Class: class shop.RealItem; Name: someItem; Price: 101.5; Weight: 1560.55";
 
     @BeforeEach
-    void initialiazeRealItem() {
+    void initializeRealItem() {
         realItem = new RealItem();
         realItem.setName("someItem");
         realItem.setWeight(1560.55);
