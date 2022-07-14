@@ -1,13 +1,16 @@
 package shop;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-class RealItemTest {
+import static org.testng.Assert.assertEquals;
+
+public class RealItemTest {
 
     private RealItem realItem;
     private static final String EXPECTED_RESULT = "Class: class shop.RealItem; Name: someItem; Price: 101.5; Weight: 1560.55";
 
-    @BeforeEach
+    @BeforeTest
     void initializeRealItem() {
         realItem = new RealItem();
         realItem.setName("someItem");
@@ -17,6 +20,6 @@ class RealItemTest {
 
     @Test
     void testRealItem() {
-        Assertions.assertEquals(EXPECTED_RESULT, realItem.toString());
+        assertEquals(EXPECTED_RESULT, realItem.toString());
     }
 }

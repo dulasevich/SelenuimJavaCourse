@@ -1,13 +1,15 @@
 package shop;
 
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-class VirtualItemTest {
+import static org.testng.Assert.assertTrue;
+
+public class VirtualItemTest {
 
     private VirtualItem virtualItem;
-    private static final String EXPECTED_RESULT = "Class: class shop.VirtualItem; Name: someItem; Price: 123.0; Size on disk: 11.1";
 
-    @BeforeEach
+    @BeforeTest
     void initializeVirtualItem() {
         virtualItem = new VirtualItem();
         virtualItem.setName("someItem");
@@ -15,9 +17,8 @@ class VirtualItemTest {
         virtualItem.setSizeOnDisk(11.1);
     }
 
-
     @Test
     void testVirtualItem() {
-        Assertions.assertTrue(virtualItem.toString().contains("11.1"));
+        assertTrue(virtualItem.toString().contains("11.1"));
     }
 }
