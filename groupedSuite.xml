@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Groups" verbose="1" >
+    <test name="parserNoMethods" >
+        <groups>
+            <run>
+                <include name="checkinTests"  />
+            </run>
+        </groups>
+        <classes>
+            <class name="parser.JsonParserTest"/>
+        </classes>
+    </test>
+    <test name="parserMethods" >
+        <classes>
+            <class name="parser.JsonParserTest">
+                <methods>
+                    <include name="testWriteToFile"/>
+                    <include name="deleteCreatedFile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="shop">
+        <groups>
+            <run>
+                <exclude name="brokenTest"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="shop.CartTest"/>
+        </classes>
+    </test>
+</suite>
