@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parameters" verbose="1" >
     <test name="Parameter test one">
-        <parameter name="name" value="andrew-cart"></parameter>
+        <parameter name="name" value="andrew-cart"/>
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
@@ -11,7 +11,7 @@
         </classes>
     </test>
     <test name="Parameter test two">
-        <parameter name="name" value="pavel-cart"></parameter>
+        <parameter name="name" value="pavel-cart"/>
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
@@ -21,7 +21,7 @@
         </classes>
     </test>
     <test name="Parameter test three">
-        <parameter name="name" value="alex-cart"></parameter>
+        <parameter name="name" value="alex-cart"/>
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
@@ -31,7 +31,7 @@
         </classes>
     </test>
     <test name="Parameter test four">
-        <parameter name="name" value="eugen-cart"></parameter>
+        <parameter name="name" value="eugen-cart"/>
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
@@ -41,7 +41,7 @@
         </classes>
     </test>
     <test name="Parameter test five">
-        <parameter name="name" value="viktor-cart"></parameter>
+        <parameter name="name" value="viktor-cart"/>
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>

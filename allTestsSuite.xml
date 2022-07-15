@@ -9,7 +9,7 @@
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
-                    <exclude name="testNoSuchFileExceptionParameter"></exclude>
+                    <exclude name="testNoSuchFileExceptionParameter"/>
                 </methods>
             </class>
         </classes>

@@ -25,7 +25,13 @@ public class JsonParserTest {
 
     @DataProvider(name = "fileName")
     public Object[][] dataProviderMethod() {
-        return new Object[][]{{"andrew-cart"}, {"pavel-cart"}, {"alex-cart"}, {"eugen-cart"}, {"viktor-cart"}};
+        return new Object[][]{
+                {"andrew-cart"},
+                {"pavel-cart"},
+                {"alex-cart"},
+                {"eugen-cart"},
+                {"viktor-cart"}
+        };
     }
 
 
@@ -36,8 +42,9 @@ public class JsonParserTest {
         });
     }
 
-    @Parameters({"name"})
-    @Test
+    //@Ignore -> as discussed @Ignored can be used as well, but leaving 'enabled = false' as per request
+    @Parameters({"fileName"})
+    @Test(enabled = false)
     public void testNoSuchFileExceptionParameter(String name) {
         assertThrows(NoSuchFileException.class, () -> {
             jsonParser.readFromFile(new File("src/main/resources/" + name + ".json"));

@@ -7,7 +7,7 @@
             </run>
         </groups>
         <classes>
-            <class name="parser.JsonParserTest"></class>
+            <class name="parser.JsonParserTest"/>
         </classes>
     </test>
     <test name="parserMethods" >
@@ -23,11 +23,11 @@
     <test name="shop">
         <groups>
             <run>
-                <exclude name="brokenTest"></exclude>
+                <exclude name="brokenTest"/>
             </run>
         </groups>
         <classes>
-            <class name="shop.CartTest"></class>
+            <class name="shop.CartTest"/>
         </classes>
     </test>
 </suite>
