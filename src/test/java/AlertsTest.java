@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static by.Variables.*;
-
+//covers task 6
 public class AlertsTest {
     private WebDriver driver;
 
