@@ -31,11 +31,9 @@ public class UserTest {
     void userTest() {
         WebElement getUser = driver.findElement(By.cssSelector(".btn"));
         getUser.click();
-
         new WebDriverWait(driver, Duration.ofSeconds(5)).
-                until(ExpectedConditions.visibilityOfElementLocated(userImage));
-
-        Assertions.assertTrue(driver.findElement(userFirstName).isDisplayed());
+                until(ExpectedConditions.visibilityOfElementLocated(USER_IMAGE));
+        Assertions.assertTrue(driver.findElement(USER_FIRST_NAME).isDisplayed());
     }
 
     @AfterEach

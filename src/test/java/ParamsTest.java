@@ -17,7 +17,7 @@ import static by.Variables.*;
 public class ParamsTest {
     private WebDriver driver;
     private final static String CREDENTIALS_1 = "testlands@yandex.by, JavaCourse1!";
-    private final static String CREDENTIALS_2 = "aaa1230912, 1234567890!#)";
+    private final static String CREDENTIALS_2 = "aaa1230912, 1234567890!#)"; //test123QWE
 
     @BeforeEach
     void initializeDriver() {
@@ -30,22 +30,18 @@ public class ParamsTest {
 
     @ParameterizedTest()
     @CsvSource({CREDENTIALS_1, CREDENTIALS_2})
-    void login (String l, String p){
-        WebElement logIntoExistingAccount = driver.findElement(loginButton);
+    void login (String login, String password){
+        WebElement logIntoExistingAccount = driver.findElement(LOGIN_BUTTON);
         logIntoExistingAccount.click();
-
-        WebElement login = driver.findElement(loginField);
-        login.sendKeys(l);
-        login.submit();
-
-        WebElement password = driver.findElement(passwordField);
-        password.sendKeys(p);
-        password.submit();
-
+        WebElement loginField = driver.findElement(LOGIN_FIELD);
+        loginField.sendKeys(login);
+        loginField.submit();
+        WebElement passwordField = driver.findElement(PASSWORD_FIELD);
+        passwordField.sendKeys(password);
+        passwordField.submit();
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated
-                (accountName));
-
-        Assertions.assertTrue(driver.findElement(mailIcon).isDisplayed());
+                (ACCOUNT_NAME));
+        Assertions.assertTrue(driver.findElement(MAIL_ICON).isDisplayed());
     }
 
     @AfterEach

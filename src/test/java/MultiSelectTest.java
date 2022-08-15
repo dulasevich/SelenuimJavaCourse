@@ -8,12 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static by.Variables.states;
+import static by.Variables.USA_STATES;
 
 //Сovers task 5
 public class MultiSelectTest {
@@ -28,21 +27,22 @@ public class MultiSelectTest {
         driver.get("https://demo.seleniumeasy.com/basic-select-dropdown-demo.html");
     }
 
-    @Test
-    void multiTest() {
-        WebElement multi = driver.findElement(states);
+    private Select randomThreeStatesSelection() {
+        WebElement multi = driver.findElement(USA_STATES);
         Select select = new Select(multi);
-
-        List<String> allOptions = select.getOptions().stream().map(el -> el.getText()).collect(Collectors.toList());
-
         Random r = new Random();
         while (select.getAllSelectedOptions().size() != 3) {
             select.selectByIndex(r.nextInt(select.getOptions().size() - 1));
         }
-        List<WebElement> selected = select.getAllSelectedOptions();
-        List<String> selectedOptions = new ArrayList<>();
-        selected.forEach(el -> selectedOptions.add(el.getText()));
+        return select;
+    }
 
+    @Test
+    void multiTest() {
+        List<String> allOptions = randomThreeStatesSelection().getOptions().stream()
+                .map(WebElement::getText).collect(Collectors.toList());
+        List<String> selectedOptions = randomThreeStatesSelection().getAllSelectedOptions().stream()
+                .map(WebElement::getText).collect(Collectors.toList());
         Assertions.assertTrue(allOptions.containsAll(selectedOptions));
     }
 

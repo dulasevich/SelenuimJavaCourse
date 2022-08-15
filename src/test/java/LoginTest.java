@@ -1,3 +1,4 @@
+import by.Variables;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import static by.Variables.*;
@@ -23,38 +25,31 @@ public class LoginTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://mail.yandex.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }
 
     @Test
-    void loginTest() throws InterruptedException {
+    void loginTest() {
         /* Thread sleep is type of implicity waiters, it just waits for the specific number of time before doing the next
         * action. The only different beetween Thread.sleep and timeouts().implicitlyWait is that Thread.sleep we need to
         * setup before each specific action we want to do next, while timeouts().implicitlyWait we can setup just once*/
-        Thread.sleep(1000);
 
-        WebElement logIntoExistingAccount = driver.findElement(loginButton);
+        //Thread.sleep(1000);
+
+        WebElement logIntoExistingAccount = driver.findElement(LOGIN_BUTTON);
         logIntoExistingAccount.click();
-
-        WebElement login = driver.findElement(loginField);
+        WebElement login = driver.findElement(LOGIN_FIELD);
         login.sendKeys(LOGIN);
         login.submit();
-
-        Thread.sleep(1000);
-
-        WebElement password = driver.findElement(passwordField);
+        WebElement password = driver.findElement(PASSWORD_FIELD);
         password.sendKeys(PASSWORD);
         password.submit();
-
-        Thread.sleep(3000);
-
-        WebElement checkbox = driver.findElement(emailsCheckbox);
+        WebElement checkbox = driver.findElement(EMAILS_CHECKBOX);
         checkbox.click();
-
-        WebElement writeEmail = driver.findElement(writeEmailButton);
-        WebElement forwardEmail = driver.findElement(forwardEmailIcon);
-        WebElement title = driver.findElement(pageTitle);
-        WebElement date = driver.findElement(currentDate);
-
+        WebElement writeEmail = driver.findElement(WRITE_EMAIL_BUTTON);
+        WebElement forwardEmail = driver.findElement(FORWARD_EMAIL_ICON);
+        WebElement title = driver.findElement(PAGE_TITLE);
+        WebElement date = driver.findElement(Variables.CURRENT_DATE);
         Assertions.assertAll(() -> {
             Assertions.assertTrue(writeEmail.isDisplayed());
             Assertions.assertTrue(forwardEmail.isEnabled());

@@ -31,13 +31,10 @@ public class DownloadTest {
     void downloadTest() {
         WebElement clickDownload = driver.findElement(By.cssSelector("#cricle-btn"));
         clickDownload.click();
-
-        new WebDriverWait(driver, Duration.ofSeconds(15)).
-                until(ExpectedConditions.textToBePresentInElement(driver.findElement(percent), "50%"));
-
+        new WebDriverWait(driver, Duration.ofSeconds(15), Duration.ofMillis(100)).
+                until(ExpectedConditions.textToBePresentInElement(driver.findElement(PERCENT_ICON), "50%"));
         driver.navigate().refresh();
-
-        Assertions.assertEquals("0%", driver.findElement(percent).getText());
+        Assertions.assertEquals("0%", driver.findElement(PERCENT_ICON).getText());
     }
 
     @AfterEach
