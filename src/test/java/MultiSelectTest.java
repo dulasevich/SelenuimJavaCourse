@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -27,23 +29,34 @@ public class MultiSelectTest {
         driver.get("https://demo.seleniumeasy.com/basic-select-dropdown-demo.html");
     }
 
-    private Select randomThreeStatesSelection() {
-        WebElement multi = driver.findElement(USA_STATES);
-        Select select = new Select(multi);
-        Random r = new Random();
-        while (select.getAllSelectedOptions().size() != 3) {
-            select.selectByIndex(r.nextInt(select.getOptions().size() - 1));
+    private List<String> randomThreeStatesSelection(Select select) {
+        Random random = new Random();
+        select.getOptions();
+        List<WebElement> allStates = select.getOptions();
+        List<String> expectedStates = new ArrayList<>();
+        int numberOfOptionsToBeSelected=3;
+        while (expectedStates.size() != numberOfOptionsToBeSelected) {
+            for (int i = 0; i < numberOfOptionsToBeSelected; i++) {
+                int randomIndex = random.nextInt(allStates.size());
+                expectedStates.add(allStates.get(randomIndex).getText());
+            }
         }
-        return select;
+        return expectedStates;
     }
 
     @Test
     void multiTest() {
-        List<String> allOptions = randomThreeStatesSelection().getOptions().stream()
+        WebElement multi = driver.findElement(USA_STATES);
+        Select select = new Select(multi);
+        List<String> expected = randomThreeStatesSelection(select);
+        for(String state : expected){
+            select.selectByVisibleText(state);
+        }
+        List<String> selectedOptions = select.getAllSelectedOptions().stream()
                 .map(WebElement::getText).collect(Collectors.toList());
-        List<String> selectedOptions = randomThreeStatesSelection().getAllSelectedOptions().stream()
-                .map(WebElement::getText).collect(Collectors.toList());
-        Assertions.assertTrue(allOptions.containsAll(selectedOptions));
+        Collections.sort(expected);
+        Collections.sort(selectedOptions);
+        Assertions.assertTrue(expected.equals(selectedOptions));
     }
 
     @AfterEach
