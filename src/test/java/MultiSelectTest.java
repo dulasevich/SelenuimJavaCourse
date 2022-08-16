@@ -8,10 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static by.Variables.USA_STATES;
@@ -31,9 +28,8 @@ public class MultiSelectTest {
 
     private List<String> randomThreeStatesSelection(Select select) {
         Random random = new Random();
-        select.getOptions();
         List<WebElement> allStates = select.getOptions();
-        List<String> expectedStates = new ArrayList<>();
+        Set<String> expectedStates = new HashSet<>();
         int numberOfOptionsToBeSelected=3;
         while (expectedStates.size() != numberOfOptionsToBeSelected) {
             for (int i = 0; i < numberOfOptionsToBeSelected; i++) {
@@ -41,7 +37,7 @@ public class MultiSelectTest {
                 expectedStates.add(allStates.get(randomIndex).getText());
             }
         }
-        return expectedStates;
+        return new ArrayList<>(expectedStates);
     }
 
     @Test
