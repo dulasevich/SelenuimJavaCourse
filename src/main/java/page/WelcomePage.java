@@ -1,22 +1,17 @@
+package page;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class WelcomePage {
+public class WelcomePage extends BasePage {
 
-    private final static String URL = "https://mail.yandex.com/";
     private final static By LOGIN_BUTTON = By.linkText("Log in");
 
-    private final WebDriver driver;
-
     public WelcomePage() {
-        this.driver = WebDriverSingleton.getInstance();
-
-        this.driver.manage().window().maximize();
-        this.driver.get(URL);
+        super();
     }
 
-    public LoginPage logIntoAccount() {
+    public LoginPage navigateToLoginScreen() {
         final WebElement loginOption = driver.findElement(LOGIN_BUTTON);
         loginOption.click();
         return new LoginPage();
