@@ -1,14 +1,11 @@
 package page;
 
 import helper.Waiter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MailBoxPage extends BasePage{
-
-    private static final By USER_LOGO = By.xpath("//a[contains(@class, 'legouser')]/div[contains(@class, 'user-pic')]");
 
     @FindBy(xpath = "//a[contains(@class, 'legouser')]/div[contains(@class, 'user-pic')]")
     private WebElement userLogo;
@@ -22,7 +19,7 @@ public class MailBoxPage extends BasePage{
     }
 
     public WelcomePage logoutFromAccount() {
-        Waiter.waifForWebElementVisibility(USER_LOGO);
+        Waiter.waifForWebElementVisibility(userLogo);
         userLogo.click();
         logoutButton.click();
         return new WelcomePage();

@@ -6,9 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage{
 
-    private final static String LOGIN = "aaa1230912";
-    private final static String PASSWORD = "qazwsxT12345";
-
     @FindBy(name = "login")
     private WebElement loginField;
 
@@ -20,13 +17,13 @@ public class LoginPage extends BasePage{
         PageFactory.initElements(driver, this);
     }
 
-    public void enterLogin() {
-        loginField.sendKeys(LOGIN);
+    public void enterLogin(String login) {
+        loginField.sendKeys(login);
         loginField.submit();
     }
 
-    public MailBoxPage enterPassword() {
-        passwordField.sendKeys(PASSWORD);
+    public MailBoxPage enterPassword(String password) {
+        passwordField.sendKeys(password);
         passwordField.submit();
         return new MailBoxPage();
     }
