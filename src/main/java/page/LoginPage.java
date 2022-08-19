@@ -1,19 +1,28 @@
-import org.openqa.selenium.WebDriver;
+package page;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PasswordPage {
+public class LoginPage extends BasePage{
 
-    private final static String PASSWORD = "JavaCourse2!";
-    private final WebDriver driver;
+    private final static String LOGIN = "aaa1230912";
+    private final static String PASSWORD = "qazwsxT12345";
+
+    @FindBy(name = "login")
+    private WebElement loginField;
 
     @FindBy(id = "passp-field-passwd")
     private WebElement passwordField;
 
-    public PasswordPage() {
-        this.driver = WebDriverSingleton.getInstance();
+    public LoginPage() {
+        super();
         PageFactory.initElements(driver, this);
+    }
+
+    public void enterLogin() {
+        loginField.sendKeys(LOGIN);
+        loginField.submit();
     }
 
     public MailBoxPage enterPassword() {

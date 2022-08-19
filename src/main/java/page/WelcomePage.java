@@ -1,25 +1,20 @@
-import org.openqa.selenium.WebDriver;
+package page;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class WelcomePage {
-
-    private final static String URL = "https://mail.yandex.com/";
-    private final WebDriver driver;
+public class WelcomePage extends BasePage{
 
     @FindBy(linkText = "Log in")
     private WebElement loginButton;
 
     public WelcomePage() {
-        this.driver = WebDriverSingleton.getInstance();
+        super();
         PageFactory.initElements(driver, this);
-
-        this.driver.manage().window().maximize();
-        this.driver.get(URL);
     }
 
-    public LoginPage logIntoAccount() {
+    public LoginPage navigateToLoginScreen() {
         loginButton.click();
         return new LoginPage();
     }
