@@ -17,7 +17,7 @@ public class Driver {
     }
 
     public static void turnDriverDown() {
-        if (driver != null){
+        if (driver != null) {
             driver.quit();
             driver = null;
         }

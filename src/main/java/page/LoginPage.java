@@ -1,25 +1,28 @@
 package page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends BasePage{
 
-    private final static By LOGIN_FIELD = By.name("login");
-    private final static By PASSWORD_FIELD = By.id("passp-field-passwd");
+    @FindBy(name = "login")
+    private WebElement loginField;
+
+    @FindBy(id = "passp-field-passwd")
+    private WebElement passwordField;
 
     public LoginPage() {
         super();
+        PageFactory.initElements(driver, this);
     }
 
     public void enterLogin(String login) {
-        final WebElement loginField = driver.findElement(LOGIN_FIELD);
         loginField.sendKeys(login);
         loginField.submit();
     }
 
     public MailBoxPage enterPassword(String password) {
-        final WebElement passwordField = driver.findElement(PASSWORD_FIELD);
         passwordField.sendKeys(password);
         passwordField.submit();
         return new MailBoxPage();

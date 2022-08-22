@@ -1,10 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import page.LoginPage;
-import page.MailBoxPage;
-import page.WelcomePage;
+import page.*;
 
-public class LogOutTest extends BaseTest{
+public class LogOutTest extends BaseTest {
 
     private final static String LOGIN = "aaa1230912";
     private final static String PASSWORD = "qazwsxT12345";
@@ -14,7 +12,7 @@ public class LogOutTest extends BaseTest{
         LoginPage loginPage = welcomePage.navigateToLoginScreen();
         loginPage.enterLogin(LOGIN);
         MailBoxPage mailBoxPage = loginPage.enterPassword(PASSWORD);
-        WelcomePage welcomepage = mailBoxPage.logoutFromAccount();
-        Assertions.assertTrue(welcomepage.getLoginButton().isDisplayed());
+        WelcomePage welcomePage = mailBoxPage.logoutFromAccount();
+        Assertions.assertTrue(welcomePage.getLoginButton().isDisplayed());
     }
 }

@@ -1,23 +1,25 @@
 package page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class WelcomePage extends BasePage {
+public class WelcomePage extends BasePage{
 
-    private final static By LOGIN_BUTTON = By.linkText("Log in");
+    @FindBy(linkText = "Log in")
+    private WebElement loginButton;
 
     public WelcomePage() {
         super();
+        PageFactory.initElements(driver, this);
     }
 
     public LoginPage navigateToLoginScreen() {
-        final WebElement loginOption = driver.findElement(LOGIN_BUTTON);
-        loginOption.click();
+        loginButton.click();
         return new LoginPage();
     }
 
     public WebElement getLoginButton() {
-        return driver.findElement(LOGIN_BUTTON);
+        return loginButton;
     }
 }
