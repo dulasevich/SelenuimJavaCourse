@@ -9,6 +9,7 @@ public class LogOutTest extends BaseTest {
 
     @Test
     void logoutTest() {
+        welcomePage.makeHomePageScreenshot();
         LoginPage loginPage = welcomePage.navigateToLoginScreen();
         loginPage.enterLogin(LOGIN);
         MailBoxPage mailBoxPage = loginPage.enterPassword(PASSWORD);
