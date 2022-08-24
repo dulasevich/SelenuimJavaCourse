@@ -12,6 +12,7 @@ public class LogOutTest extends BaseTest {
         LoginPage loginPage = welcomePage.navigateToLoginScreen();
         loginPage.enterLogin(LOGIN);
         MailBoxPage mailBoxPage = loginPage.enterPassword(PASSWORD);
+        mailBoxPage.makeHomePageScreenshot();
         WelcomePage welcomePage = mailBoxPage.logoutFromAccount();
         Assertions.assertTrue(welcomePage.getLoginButton().isDisplayed());
     }
