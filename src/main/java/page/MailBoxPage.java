@@ -1,9 +1,16 @@
 package page;
 
 import helper.Waiter;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class MailBoxPage extends BasePage{
 
@@ -23,5 +30,16 @@ public class MailBoxPage extends BasePage{
         userLogo.click();
         logoutButton.click();
         return new WelcomePage();
+    }
+
+    public void makeHomePageScreenshot() {
+        Waiter.waifForWebElementVisibility(userLogo);
+        File savedImage = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String time = LocalDateTime.now().toString().replace(':', '-');
+        try {
+            FileUtils.moveFile(savedImage, new File("C:\\Intel\\" + time + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
