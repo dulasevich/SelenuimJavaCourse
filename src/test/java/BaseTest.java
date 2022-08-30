@@ -8,8 +8,7 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    private WebDriver driver;
-    private final static String URL = "https://mail.yandex.com/";
+    protected WebDriver driver;
     protected WelcomePage welcomePage;
 
     @BeforeEach
@@ -17,7 +16,7 @@ public class BaseTest {
         driver = Driver.getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.manage().window().maximize();
-        driver.get(URL);
+        //driver.get(URL);
         welcomePage = new WelcomePage();
     }
 
