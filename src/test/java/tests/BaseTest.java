@@ -1,11 +1,18 @@
+package tests;
+
 import driver.Driver;
+import helper.TestFailure;
+import io.qameta.allure.Epic;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import page.WelcomePage;
 
 import java.time.Duration;
 
+@Epic("Yandex mail tests")
+@ExtendWith(TestFailure.class)
 public class BaseTest {
 
     private WebDriver driver;

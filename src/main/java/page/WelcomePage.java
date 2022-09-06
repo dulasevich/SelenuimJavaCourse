@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WelcomePage extends BasePage{
 
-    @FindBy(linkText = "Log in")
+    @FindBy(css = ".PSHeader-NoLoginButton")
     private WebElement loginButton;
 
     public WelcomePage() {

@@ -20,6 +20,9 @@ public class MailBoxPage extends BasePage{
     @FindBy(css = ".legouser__menu-item_action_exit")
     private WebElement logoutButton;
 
+    @FindBy(css = ".ToggleWidget-DayOfMonth")
+    private WebElement currentDate;
+
     public MailBoxPage() {
         super();
         PageFactory.initElements(driver, this);
@@ -41,5 +44,13 @@ public class MailBoxPage extends BasePage{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public WebElement getUserLogo() {
+        return userLogo;
+    }
+
+    public String getCurrentDate() {
+        return currentDate.getText();
     }
 }
