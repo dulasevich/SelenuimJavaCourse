@@ -1,6 +1,7 @@
 package page;
 
 import helper.Waiter;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,11 +21,15 @@ public class MailBoxPage extends BasePage{
     @FindBy(css = ".legouser__menu-item_action_exit")
     private WebElement logoutButton;
 
+    @FindBy(css = ".ToggleWidget-DayOfMonth")
+    private WebElement currentDate;
+
     public MailBoxPage() {
         super();
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Logout From account")
     public WelcomePage logoutFromAccount() {
         Waiter.waifForWebElementVisibility(userLogo);
         userLogo.click();
@@ -41,5 +46,15 @@ public class MailBoxPage extends BasePage{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public WebElement getUserLogo() {
+        return userLogo;
+    }
+
+    @Step("Get current date")
+    public String getCurrentDate() {
+        Waiter.waifForWebElementVisibility(currentDate);
+        return currentDate.getText();
     }
 }
