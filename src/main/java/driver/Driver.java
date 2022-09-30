@@ -1,17 +1,24 @@
 package driver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static helper.SauceLab.*;
 
 public class Driver {
 
     private static WebDriver driver;
 
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver(){
         if (driver == null) {
-            WebDriverManager.getInstance(ChromeDriver.class).setup();
-            driver = new ChromeDriver();
+            try {
+                driver = new RemoteWebDriver(new URL(URL), sauceLabCloudCombination(3));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
         return driver;
     }
