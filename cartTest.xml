@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CartTestsSuite" verbose="1" >
+    <listeners>
+        <listener class-name="helper.TestListener"></listener>
+    </listeners>
+    <test name="CartTests" >
+        <classes>
+            <class name="tests.CartTest"></class>
+        </classes>
+    </test>
+</suite>

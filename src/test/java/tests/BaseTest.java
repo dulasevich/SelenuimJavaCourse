@@ -1,34 +1,28 @@
 package tests;
 
 import driver.Driver;
-import helper.TestFailure;
-import io.qameta.allure.Epic;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import page.WelcomePage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import pages.HomePage;
 
-import java.time.Duration;
-
-@Epic("Yandex mail tests")
-@ExtendWith(TestFailure.class)
 public class BaseTest {
 
     private WebDriver driver;
-    private final static String URL = "https://mail.yandex.com/";
-    protected WelcomePage welcomePage;
+    private final static String URL = "http://automationpractice.com/index.php";
+    protected HomePage homePage;
 
-    @BeforeEach
+    @BeforeClass
+    @Step("Navigate to Home page")
     void initializeDriver() {
         driver = Driver.getDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         driver.manage().window().maximize();
         driver.get(URL);
-        welcomePage = new WelcomePage();
+        homePage = new HomePage();
     }
 
-    @AfterEach
+    @AfterClass
     void closeBrowser() {
         Driver.turnDriverDown();
     }

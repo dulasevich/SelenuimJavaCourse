@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="WishListTestsSuite" verbose="1" >
+    <listeners>
+        <listener class-name="helper.TestListener"></listener>
+    </listeners>
+    <test name="WishListTests" >
+        <classes>
+            <class name="tests.AutoCreatedWishListTests"></class>
+            <class name="tests.ManualWishListTest"></class>
+        </classes>
+    </test>
+</suite>
