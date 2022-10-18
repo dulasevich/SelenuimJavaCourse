@@ -1,4 +1,4 @@
-{
+[{
   "firstname": "Lando",
   "lastname": "Norris",
   "pass": "mnbvcxz0987654321",
@@ -7,4 +7,16 @@
   "state": "34",
   "postcode": "02108",
   "phoneNumber": "79506837291037484"
-}
+},
+  {
+    "firstname": "Test",
+    "lastname": "Test",
+    "pass": "mnbvcxz0987654321",
+    "address": "address",
+    "city": "Boston",
+    "state": "50",
+    "postcode": "02108",
+    "phoneNumber": "79506837291037484"
+  }
+
+]

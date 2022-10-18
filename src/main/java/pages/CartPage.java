@@ -1,8 +1,6 @@
 package pages;
 
-import driver.Driver;
 import helper.Waiter;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,35 +9,37 @@ import java.util.List;
 
 public class CartPage extends BasePage{
 
-    private By productsInCart = By.xpath("//tr[contains(@class, 'cart_item')]");
+    @FindBy(xpath = "//tr[contains(@class, 'cart_item')]")
+    private List<WebElement> products;
 
     @FindBy(id = "cart_title")
     private WebElement cartWelcomeText;
 
     @FindBy( css = "#summary_products_quantity")
-    private WebElement cartProductsNumber;
+    private WebElement cartProductsQuantity;
 
-    @FindBy(xpath = "//a[@class='cart_quantity_delete'][1]")
-    private WebElement delete;
+    @FindBy(xpath = "//a[@class='cart_quantity_delete']")
+    private WebElement deleteButton;
 
     @FindBy(css = ".alert-warning")
     private WebElement emptyBagText;
 
     public CartPage() {
+        super();
         PageFactory.initElements(driver, this);
     }
 
-    public String getCartProductsNumber() {
+    public String getCartProductsQuantity() {
         Waiter.waifForWebElementVisibility(cartWelcomeText);
-        return cartProductsNumber.getText();
+        return cartProductsQuantity.getText();
     }
 
     public void cleanProducts() {
-        Waiter.waifForWebElementVisibility(delete);
-        List<WebElement> deleteIconsInCart = Driver.getDriver().findElements(By.cssSelector(".icon-trash"));
-        for (int i = 0; i<deleteIconsInCart.size(); i++) {
-            Waiter.waifForNumberOfElementsToBe(productsInCart, deleteIconsInCart.size()-i);
-            delete.click();
+        Waiter.waifForWebElementVisibility(deleteButton);
+        int productsSize = products.size();
+        for (int i = 0; i<productsSize; i++) {
+            Waiter.waifForNumberOfElementsToBe(products, productsSize-i);
+            deleteButton.click();
         }
         Waiter.waifForWebElementVisibility(emptyBagText);
     }

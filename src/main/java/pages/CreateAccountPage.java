@@ -1,51 +1,47 @@
 package pages;
 
-import driver.Driver;
-import helper.JsonReader;
+import dto.User;
 import helper.Waiter;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.accountPages.WelcomeAccountPage;
 
-import java.time.Duration;
+import java.util.List;
 
 public class CreateAccountPage extends BasePage{
 
-    public static final String USER_INFO_FILE_PATH = "C:\\TC - Selenuim Java\\Project - Task1UnitTest\\" +
-            "UnitTesting-master\\src\\test\\resources\\userInfo.json";
+    @FindBy(xpath = ".//*[@id='id_state']/option")
+    private List<WebElement> stateOptions;
 
     @FindBy(id = "customer_firstname")
-    private WebElement firstName;
+    private WebElement firstNameField;
 
     @FindBy(id = "customer_lastname")
-    private WebElement lastName;
+    private WebElement lastNameField;
 
     @FindBy(css = "#passwd")
-    private WebElement password;
+    private WebElement passwordField;
 
-    @FindBy(xpath = "//*[@id='address1']")
-    private WebElement address;
+    @FindBy(xpath = ".//*[@id='address1']")
+    private WebElement addressField;
 
     @FindBy(id = "city")
-    private WebElement city;
+    private WebElement cityField;
 
-    @FindBy(id = "id_state")
-    private WebElement state;
+    @FindBy(css = "#id_state")
+    private WebElement stateField;
 
     @FindBy(id = "postcode")
-    private WebElement postcode;
+    private WebElement postcodeField;
 
     @FindBy(id = "submitAccount")
     private WebElement registerButton;
 
     @FindBy(id = "phone_mobile")
-    private WebElement mobilePhoneNumber;
+    private WebElement mobilePhoneNumberField;
 
     public CreateAccountPage() {
         super();
@@ -53,24 +49,23 @@ public class CreateAccountPage extends BasePage{
     }
 
     @Step("Add personal information to register account")
-    public WelcomeAccountPage registerAccount() {
-        Waiter.waifForWebElementVisibility(firstName);
+    public WelcomeAccountPage registerAccount(User user) {
+        Waiter.waifForWebElementVisibility(firstNameField);
 
-        firstName.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("firstname").getAsString());
-        lastName.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("lastname").getAsString());
-        password.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("pass").getAsString());
-        address.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("address").getAsString());
-        city.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("city").getAsString());
+        firstNameField.sendKeys(user.getFirstname());
+        lastNameField.sendKeys(user.getLastname());
+        passwordField.sendKeys(user.getPass());
+        addressField.sendKeys(user.getAddress());
+        cityField.sendKeys(user.getCity());
 
-        Select select = new Select(state);
-        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(5))
-                .until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#id_state option"), 1));
-        select.selectByValue(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("state").getAsString());
+        Select select = new Select(stateField);
+        Waiter.waifForNumberOfElementsToBe(stateOptions, 54);
+        select.selectByValue(user.getState());
 
-        postcode.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("postcode").getAsString());
-        mobilePhoneNumber.sendKeys(JsonReader.readFromJson(USER_INFO_FILE_PATH).get("phoneNumber").getAsString());
+        postcodeField.sendKeys(user.getPostcode());
+        mobilePhoneNumberField.sendKeys(user.getPhoneNumber());
+
         registerButton.click();
-
         return new WelcomeAccountPage();
     }
 

@@ -5,7 +5,8 @@
     </listeners>
     <test name="AccountTests" >
         <classes>
-            <class name="tests.AccountTests"></class>
+            <class name="tests.CreateAccountTest"></class>
+            <class name="tests.LoginTest"></class>
         </classes>
     </test>
 </suite>

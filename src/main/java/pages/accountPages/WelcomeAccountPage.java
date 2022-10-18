@@ -1,44 +1,33 @@
 package pages.accountPages;
 
-import driver.Driver;
 import helper.Waiter;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasePage;
 
-public class WelcomeAccountPage {
-
-    private final WebDriver driver;
+public class WelcomeAccountPage extends BasePage {
 
     @FindBy(className = "info-account")
     private WebElement accountWelcomeText;
-
-    @FindBy(css = ".logout")
-    private WebElement signOutButton;
 
     @FindBy(css = ".lnk_wishlist")
     private WebElement myWishlistButton;
 
     public WelcomeAccountPage() {
-        this.driver = Driver.getDriver();
+        super();
         PageFactory.initElements(driver, this);
     }
 
     @Step("Get Account Welcome Text")
-    public String getAccountGreeting() {
+    public String getAccountGreetingText() {
         Waiter.waifForWebElementVisibility(accountWelcomeText);
         return accountWelcomeText.getText();
     }
 
-    @Step("Sign out from the account")
-    public void signOutFromAccount() {
-        signOutButton.click();
-    }
-
     @Step("Navigate to account wish list")
-    public WishListPage navigateToWishList() {
+    public WishListPage goToWishList() {
         Waiter.waifForWebElementVisibility(myWishlistButton);
         myWishlistButton.click();
         return new WishListPage();

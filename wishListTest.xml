@@ -5,7 +5,7 @@
     </listeners>
     <test name="WishListTests" >
         <classes>
-            <class name="tests.AutoCreatedWishListTests"></class>
+            <class name="tests.AutoCreatedWishListTest"></class>
             <class name="tests.ManualWishListTest"></class>
         </classes>
     </test>

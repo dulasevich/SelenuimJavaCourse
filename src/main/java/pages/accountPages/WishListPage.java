@@ -1,31 +1,29 @@
 package pages.accountPages;
 
-import driver.Driver;
 import helper.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasePage;
 import pages.ProductPage;
-import strategy.GoToProductPage;
 
-import java.util.List;
+import static helper.TestUtils.isDisplayed;
 
-public class WishListPage implements GoToProductPage {
+public class WishListPage extends BasePage {
 
-    private WebDriver driver;
+    @FindBy(xpath = ".//li[@class ='clearfix']/a")
+    private WebElement productFromTopSellersLink;
 
-    @FindBy(xpath = "//li[@class ='clearfix'][2]/a")
-    private WebElement productFromTopSellers;
+    @FindBy(css = "#block-history")
+    private WebElement wishListSectionBlock;
 
-    @FindBy(xpath = "//a[contains(text(),'View')]")
-    private WebElement viewWishList;
+    @FindBy(xpath = ".//a[contains(text(),'View')]")
+    private WebElement viewWishListLink;
 
     @FindBy(css = "#s_title")
-    private WebElement productFromWishList;
+    private WebElement productFromWishListTitle;
 
     @FindBy(css = ".icon-remove")
     private WebElement deleteWishListIcon;
@@ -34,36 +32,34 @@ public class WishListPage implements GoToProductPage {
     private WebElement wishListNameField;
 
     @FindBy(id = "submitWishlist")
-    private WebElement saveWishList;
+    private WebElement saveWishListButton;
 
     public WishListPage() {
-        this.driver = Driver.getDriver();
         PageFactory.initElements(driver, this);
     }
 
     @Step("Check user has NO wish list created")
     public boolean checkIfWishListExists() {
-        List<WebElement> wishList = driver.findElements(By.cssSelector("#block-history"));
-        return wishList.size() > 0;
+        return isDisplayed(wishListSectionBlock);
     }
 
     @Step("Click wish list")
     public void viewWishList() {
-        Waiter.waifForWebElementVisibility(viewWishList);
-        viewWishList.click();
+        Waiter.waifForWebElementVisibility(viewWishListLink);
+        viewWishListLink.click();
     }
 
     @Step("Get product name from the wish list")
     public String getWishListProductName() {
-        Waiter.waifForWebElementVisibility(productFromWishList);
-        return productFromWishList.getText();
+        Waiter.waifForWebElementVisibility(productFromWishListTitle);
+        return productFromWishListTitle.getText();
     }
 
     @Step("Create wish list")
     public void createWishList(String wishName) {
         Waiter.waifForWebElementVisibility(wishListNameField);
         wishListNameField.sendKeys(wishName);
-        saveWishList.click();
+        saveWishListButton.click();
     }
 
     @Step("Delete wish list")
@@ -74,11 +70,10 @@ public class WishListPage implements GoToProductPage {
         alert.accept();
     }
 
-    @Override
     @Step("Go to product page")
     public ProductPage goToProductPage() {
-        Waiter.waifForWebElementVisibility(productFromTopSellers);
-        productFromTopSellers.click();
+        Waiter.waifForWebElementVisibility(productFromTopSellersLink);
+        productFromTopSellersLink.click();
         return new ProductPage();
     }
 }

@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.TmsLink;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -9,7 +10,6 @@ import pages.ProductPage;
 import pages.accountPages.WelcomeAccountPage;
 import pages.accountPages.WishListPage;
 
-import static helper.AllureTestName.setTestName;
 import static org.testng.Assert.assertTrue;
 
 //@Listeners(TestListener.class) - does not work for some reason, should be only here?
@@ -21,18 +21,18 @@ public class ManualWishListTest extends BaseTest{
     private WishListPage wishListPage;
 
     @Description("Test case Verifies the ability to add product to your Wishlist")
+    @TmsLink("AP4")
     @Test
     void createWishListTest() {
-        setTestName("AP-4");
-        LoginPage loginPage = homePage.navigateToLoginScreen();
+        LoginPage loginPage = homePage.navigateToHeader().goToLoginScreen();
         WelcomeAccountPage welcomePage = loginPage.login(LOGIN, PASSWORD);
-        wishListPage = welcomePage.navigateToWishList();
+        wishListPage = welcomePage.goToWishList();
         wishListPage.createWishList(WISH_LIST_NAME);
         ProductPage productPage = wishListPage.goToProductPage();
         String productName = productPage.getProductName();
         productPage.addProductToWishList();
-        welcomePage = productPage.goToAccount();
-        wishListPage = welcomePage.navigateToWishList();
+        welcomePage = productPage.navigateToHeader().goToAccount();
+        wishListPage = welcomePage.goToWishList();
         wishListPage.viewWishList();
         assertTrue(wishListPage.getWishListProductName().contains(productName));
     }
