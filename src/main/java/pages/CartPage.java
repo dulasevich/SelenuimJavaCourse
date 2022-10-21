@@ -1,6 +1,5 @@
 package pages;
 
-import helper.Waiter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,17 +29,17 @@ public class CartPage extends BasePage{
     }
 
     public String getCartProductsQuantity() {
-        Waiter.waifForWebElementVisibility(cartWelcomeText);
+        waiter.waifForWebElementVisibility(cartWelcomeText);
         return cartProductsQuantity.getText();
     }
 
     public void cleanProducts() {
-        Waiter.waifForWebElementVisibility(deleteButton);
+        waiter.waifForWebElementVisibility(deleteButton);
         int productsSize = products.size();
         for (int i = 0; i<productsSize; i++) {
-            Waiter.waifForNumberOfElementsToBe(products, productsSize-i);
+            waiter.waifForNumberOfElementsToBe(products, productsSize-i);
             deleteButton.click();
         }
-        Waiter.waifForWebElementVisibility(emptyBagText);
+        waiter.waifForWebElementVisibility(emptyBagText);
     }
 }

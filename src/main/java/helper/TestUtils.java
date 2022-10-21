@@ -2,8 +2,6 @@ package helper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.User;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,13 +25,5 @@ public class TestUtils {
 
     public static User getUser(int userNumber) {
         return users.get(userNumber);
-    }
-
-    public static boolean isDisplayed(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 }

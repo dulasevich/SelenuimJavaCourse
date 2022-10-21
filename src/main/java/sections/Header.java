@@ -1,16 +1,14 @@
 package sections;
 
-import driver.Driver;
 import helper.Waiter;
-import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.CartPage;
-import pages.LoginPage;
-import pages.accountPages.WelcomeAccountPage;
 
 public class Header {
+
+    private Waiter waiter;
 
     @FindBy(css = ".login")
     private WebElement signInButton;
@@ -21,27 +19,22 @@ public class Header {
     @FindBy(xpath = "//*[@class='shopping_cart']/a")
     private WebElement cartButton;
 
-    public Header() {
-        PageFactory.initElements(Driver.getDriver(), this);
+    public Header(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        waiter = new Waiter(driver);
     }
 
-    @Step("Navigate to login")
-    public LoginPage goToLoginScreen() {
-        Waiter.waifForWebElementVisibility(signInButton);
+    public void clickLoginButton() {
+        waiter.waifForWebElementVisibility(signInButton);
         signInButton.click();
-        return new LoginPage();
     }
 
-    @Step("Navigate to cart")
-    public CartPage goToCart() {
+    public void clickCartButton() {
         cartButton.click();
-        return new CartPage();
     }
 
-    @Step("Navigate to account")
-    public WelcomeAccountPage goToAccount() {
-        Waiter.waifForWebElementVisibility(accountButton);
+    public void clickAccountButton() {
+        waiter.waifForWebElementVisibility(accountButton);
         accountButton.click();
-        return new WelcomeAccountPage();
     }
 }

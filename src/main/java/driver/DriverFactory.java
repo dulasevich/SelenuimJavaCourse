@@ -19,10 +19,11 @@ public class DriverFactory {
     private static WebDriver driver;
 
     public static WebDriver getDriver(String machine, String browser) {
+        Capabilities capabilities = Browsers.getCapabilities(browser);
         if(machine.equals("local")) {
             driver = getLocalDriver(browser);
         } else if (machine.equals("remote")) {
-            driver = getRemoteDriver(System.getProperty("cloud"));
+            driver = getRemoteDriver(System.getProperty("cloud"), capabilities);
         }
         return driver;
     }

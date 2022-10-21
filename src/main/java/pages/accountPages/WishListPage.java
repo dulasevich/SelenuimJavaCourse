@@ -1,6 +1,5 @@
 package pages.accountPages;
 
-import helper.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
@@ -8,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasePage;
 import pages.ProductPage;
-
-import static helper.TestUtils.isDisplayed;
 
 public class WishListPage extends BasePage {
 
@@ -40,31 +37,31 @@ public class WishListPage extends BasePage {
 
     @Step("Check user has NO wish list created")
     public boolean checkIfWishListExists() {
-        return isDisplayed(wishListSectionBlock);
+        return pageUtils.isDisplayed(wishListSectionBlock);
     }
 
     @Step("Click wish list")
     public void viewWishList() {
-        Waiter.waifForWebElementVisibility(viewWishListLink);
+        waiter.waifForWebElementVisibility(viewWishListLink);
         viewWishListLink.click();
     }
 
     @Step("Get product name from the wish list")
     public String getWishListProductName() {
-        Waiter.waifForWebElementVisibility(productFromWishListTitle);
+        waiter.waifForWebElementVisibility(productFromWishListTitle);
         return productFromWishListTitle.getText();
     }
 
     @Step("Create wish list")
     public void createWishList(String wishName) {
-        Waiter.waifForWebElementVisibility(wishListNameField);
+        waiter.waifForWebElementVisibility(wishListNameField);
         wishListNameField.sendKeys(wishName);
         saveWishListButton.click();
     }
 
     @Step("Delete wish list")
     public void DeleteWishList() {
-        Waiter.waifForWebElementVisibility(deleteWishListIcon);
+        waiter.waifForWebElementVisibility(deleteWishListIcon);
         deleteWishListIcon.click();
         Alert alert = driver.switchTo().alert();
         alert.accept();
@@ -72,7 +69,7 @@ public class WishListPage extends BasePage {
 
     @Step("Go to product page")
     public ProductPage goToProductPage() {
-        Waiter.waifForWebElementVisibility(productFromTopSellersLink);
+        waiter.waifForWebElementVisibility(productFromTopSellersLink);
         productFromTopSellersLink.click();
         return new ProductPage();
     }

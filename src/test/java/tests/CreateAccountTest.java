@@ -22,7 +22,7 @@ public class CreateAccountTest extends BaseTest {
     @Test(priority = 1)
     void createAccountTest(){
         User user = getUser(0);
-        LoginPage loginPage = homePage.navigateToHeader().goToLoginScreen();
+        LoginPage loginPage = homePage.goToLoginScreen();
         CreateAccountPage createAccountPage = loginPage.createAccount(LOGIN);
         WelcomeAccountPage accountPage = createAccountPage.registerAccount(user);
         assertEquals(accountPage.getAccountGreetingText(), ACCOUNT_WELCOME_TEXT);

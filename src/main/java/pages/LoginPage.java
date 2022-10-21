@@ -1,6 +1,5 @@
 package pages;
 
-import helper.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,7 +30,7 @@ public class LoginPage extends BasePage {
 
     @Step("Login to account")
     public WelcomeAccountPage login(String login, String password) {
-        Waiter.waifForWebElementVisibility(emailLoginField);
+        waiter.waifForWebElementVisibility(emailLoginField);
         emailLoginField.sendKeys(login);
         passwordField.sendKeys(password);
         signIntoAccountButton.click();
@@ -41,7 +40,7 @@ public class LoginPage extends BasePage {
 
     @Step("Create account")
     public CreateAccountPage createAccount(String login) {
-        Waiter.waifForWebElementVisibility(emailCreateField);
+        waiter.waifForWebElementVisibility(emailCreateField);
         emailCreateField.sendKeys(login);
         createAccountButton.click();
 

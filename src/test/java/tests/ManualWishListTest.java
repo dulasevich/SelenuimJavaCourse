@@ -24,14 +24,14 @@ public class ManualWishListTest extends BaseTest{
     @TmsLink("AP4")
     @Test
     void createWishListTest() {
-        LoginPage loginPage = homePage.navigateToHeader().goToLoginScreen();
+        LoginPage loginPage = homePage.goToLoginScreen();
         WelcomeAccountPage welcomePage = loginPage.login(LOGIN, PASSWORD);
         wishListPage = welcomePage.goToWishList();
         wishListPage.createWishList(WISH_LIST_NAME);
         ProductPage productPage = wishListPage.goToProductPage();
         String productName = productPage.getProductName();
         productPage.addProductToWishList();
-        welcomePage = productPage.navigateToHeader().goToAccount();
+        welcomePage = productPage.goToAccount();
         wishListPage = welcomePage.goToWishList();
         wishListPage.viewWishList();
         assertTrue(wishListPage.getWishListProductName().contains(productName));

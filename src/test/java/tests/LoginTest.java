@@ -19,7 +19,7 @@ public class LoginTest extends BaseTest{
     @TmsLink("AP2")
     @Test()
     void loginTest(){
-        LoginPage loginPage = homePage.navigateToHeader().goToLoginScreen();
+        LoginPage loginPage = homePage.goToLoginScreen();
         WelcomeAccountPage accountPage = loginPage.login(LOGIN, PASSWORD);
         assertEquals(accountPage.getAccountGreetingText(), ACCOUNT_WELCOME_TEXT);
     }

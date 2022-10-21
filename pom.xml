@@ -34,7 +34,7 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/target/allure-results</allure.results.directory>
                         <machine>local</machine>
-                        <browser>firefox</browser>
+                        <browser>chrome</browser>
                         <cloud>grid</cloud>
                     </systemPropertyVariables>
                 </configuration>
@@ -63,7 +63,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.6.1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

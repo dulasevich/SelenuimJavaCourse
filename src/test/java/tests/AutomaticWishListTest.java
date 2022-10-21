@@ -15,7 +15,7 @@ import pages.accountPages.WishListPage;
 import static org.testng.Assert.assertTrue;
 
 //@Listeners(TestListener.class) - does not work for some reason, should be only here?
-public class AutoCreatedWishListTest extends BaseTest{
+public class AutomaticWishListTest extends BaseTest{
 
     private final static String LOGIN = "dulasev@mail.ru";
     private final static String PASSWORD = "qaz123";
@@ -23,7 +23,7 @@ public class AutoCreatedWishListTest extends BaseTest{
 
     @BeforeMethod
     private void checkNoWishListExist() {
-        LoginPage loginPage = homePage.navigateToHeader().goToLoginScreen();
+        LoginPage loginPage = homePage.goToLoginScreen();
         WelcomeAccountPage welcomePage = loginPage.login(LOGIN, PASSWORD);
         wishListPage = welcomePage.goToWishList();
         if (wishListPage.checkIfWishListExists()) {
@@ -39,7 +39,7 @@ public class AutoCreatedWishListTest extends BaseTest{
         ProductPage productPage = wishListPage.goToProductPage();
         String productName = productPage.getProductName();
         productPage.addProductToWishList();
-        WelcomeAccountPage welcomePage = productPage.navigateToHeader().goToAccount();
+        WelcomeAccountPage welcomePage = productPage.goToAccount();
         wishListPage = welcomePage.goToWishList();
         wishListPage.viewWishList();
         assertTrue(wishListPage.getWishListProductName().trim().contains(productName));

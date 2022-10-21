@@ -1,7 +1,6 @@
 package pages;
 
 import dto.User;
-import helper.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,7 +49,7 @@ public class CreateAccountPage extends BasePage{
 
     @Step("Add personal information to register account")
     public WelcomeAccountPage registerAccount(User user) {
-        Waiter.waifForWebElementVisibility(firstNameField);
+        waiter.waifForWebElementVisibility(firstNameField);
 
         firstNameField.sendKeys(user.getFirstname());
         lastNameField.sendKeys(user.getLastname());
@@ -59,7 +58,7 @@ public class CreateAccountPage extends BasePage{
         cityField.sendKeys(user.getCity());
 
         Select select = new Select(stateField);
-        Waiter.waifForNumberOfElementsToBe(stateOptions, 54);
+        waiter.waifForNumberOfElementsToBe(stateOptions, 54);
         select.selectByValue(user.getState());
 
         postcodeField.sendKeys(user.getPostcode());

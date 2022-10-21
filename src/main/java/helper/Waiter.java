@@ -1,6 +1,5 @@
 package helper;
 
-import driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -12,18 +11,19 @@ import java.util.List;
 
 public class Waiter {
 
-    public static void waifForWebElementVisibility(WebElement element) {
-        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(50), Duration.ofMillis(200))
+    private WebDriver driver;
+
+    public Waiter(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void waifForWebElementVisibility(WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(50), Duration.ofMillis(200))
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static void waifForWebElementInVisibility(WebElement element) {
-        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(30), Duration.ofMillis(200))
-                .until(ExpectedConditions.invisibilityOf(element));
-    }
-
-    public static void waifForNumberOfElementsToBe(List<WebElement> elements, int number) {
-        new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20), Duration.ofMillis(200))
+    public void waifForNumberOfElementsToBe(List<WebElement> elements, int number) {
+        new WebDriverWait(driver, Duration.ofSeconds(20), Duration.ofMillis(200))
                 .until(new ExpectedCondition<List<WebElement>>() {
                     @Override
                     public List<WebElement> apply(WebDriver webDriver) {

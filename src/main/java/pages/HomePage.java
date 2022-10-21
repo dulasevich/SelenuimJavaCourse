@@ -1,13 +1,12 @@
 package pages;
 
-import helper.Waiter;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static org.testng.Assert.fail;
 
 public class HomePage extends BasePage {
 
@@ -26,23 +25,17 @@ public class HomePage extends BasePage {
     }
 
     public void addProductByPosition(int position) {
-        Actions actions = new Actions(driver);
-            if (position < products.size()) {
-                Waiter.waifForWebElementVisibility(products.get(position));
-
-                if(System.getProperty("browser").equals("firefox")) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", products.get(position));
-                } else {
-                    actions.scrollToElement(products.get(position)).build().perform();
-                }
-                actions.moveToElement(products.get(position)).build().perform();
-                Waiter.waifForWebElementVisibility(addToCartButtons.get(position));
-                addToCartButtons.get(position).click();
-                Waiter.waifForWebElementVisibility(continueShoppingButton);
-                continueShoppingButton.click();
-            } else {
-                System.out.println("Current max possible position should be less than " + products.size() +
-                        ". Product at this position does not exist on home page. Going to the cart");
-            }
+        if (position > products.size()) {
+            fail("Current max possible position should be less than " + products.size() +
+                    ". Product at this position does not exist on home page");
+        }
+        WebElement product = products.get(position);
+        waiter.waifForWebElementVisibility(product);
+        pageUtils.scrollToElement(product);
+        pageUtils.hoverOverElement(product);
+        waiter.waifForWebElementVisibility(addToCartButtons.get(position));
+        addToCartButtons.get(position).click();
+        waiter.waifForWebElementVisibility(continueShoppingButton);
+        continueShoppingButton.click();
     }
 }

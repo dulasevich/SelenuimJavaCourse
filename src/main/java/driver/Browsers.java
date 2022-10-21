@@ -19,7 +19,6 @@ public class Browsers {
         return null;
     }
 
-    //where are these capabilities can be used next?
     private static ChromeOptions getChromeCapabilities() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("os", "Windows");

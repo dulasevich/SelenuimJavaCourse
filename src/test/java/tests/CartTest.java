@@ -20,7 +20,7 @@ public class CartTest extends BaseTest{
         homePage.addProductByPosition(0);
         homePage.addProductByPosition(2);
         homePage.addProductByPosition(6);
-        cartPage = homePage.navigateToHeader().goToCart();
+        cartPage = homePage.goToCart();
         assertEquals(cartPage.getCartProductsQuantity(), CART_PRODUCTS_NUMBER);
     }
 
