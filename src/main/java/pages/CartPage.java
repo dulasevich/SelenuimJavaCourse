@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CartPage extends BasePage{
 
-    @FindBy(xpath = "//tr[contains(@class, 'cart_item')]")
+    @FindBy(xpath = ".//tr[contains(@class, 'cart_item')]")
     private List<WebElement> products;
 
     @FindBy(id = "cart_title")
@@ -17,7 +17,7 @@ public class CartPage extends BasePage{
     @FindBy( css = "#summary_products_quantity")
     private WebElement cartProductsQuantity;
 
-    @FindBy(xpath = "//a[@class='cart_quantity_delete']")
+    @FindBy(xpath = ".//a[@class='cart_quantity_delete']")
     private WebElement deleteButton;
 
     @FindBy(css = ".alert-warning")

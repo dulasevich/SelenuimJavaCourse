@@ -12,7 +12,6 @@ import pages.accountPages.WishListPage;
 
 import static org.testng.Assert.assertTrue;
 
-//@Listeners(TestListener.class) - does not work for some reason, should be only here?
 public class ManualWishListTest extends BaseTest{
 
     private final static String LOGIN = "dulasev@mail.ru";

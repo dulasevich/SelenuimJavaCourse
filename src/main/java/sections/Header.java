@@ -16,7 +16,7 @@ public class Header {
     @FindBy(css = ".account")
     private WebElement accountButton;
 
-    @FindBy(xpath = "//*[@class='shopping_cart']/a")
+    @FindBy(xpath = ".//*[@class='shopping_cart']/a")
     private WebElement cartButton;
 
     public Header(WebDriver driver) {
