@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="AccountTestsSuite" verbose="1" >
+    <listeners>
+        <listener class-name="helper.TestListener"></listener>
+    </listeners>
+    <test name="AccountTests" >
+        <classes>
+            <class name="tests.CreateAccountTest"></class>
+            <class name="tests.LoginTest"></class>
+        </classes>
+    </test>
+</suite>

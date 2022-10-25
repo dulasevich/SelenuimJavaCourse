@@ -1,27 +1,26 @@
 package tests;
 
 import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import page.LoginPage;
-import page.MailBoxPage;
+import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.accountPages.WelcomeAccountPage;
 
-public class LoginTest extends BaseTest {
+import static org.testng.Assert.assertEquals;
 
-    private final static String LOGIN = "notRealForTestToFail";
-    private final static String PASSWORD = "blablabla";
+public class LoginTest extends BaseTest{
 
-    @TmsLink(value = "INT-22")
-    @Feature("Mailbox Page")
-    @DisplayName("Mailbox Login UserLogo")
-    @Description("Test case verifies if user can login to the account with credentials which do not exist")
-    @Test
+    private final static String LOGIN = "dulasev@mail.ru";
+    private final static String PASSWORD = "qaz123";
+    private final static String ACCOUNT_WELCOME_TEXT = "Welcome to your account. " +
+            "Here you can manage all of your personal information and orders.";
+
+    @Description("Test case verifies the ability to login into account")
+    @TmsLink("AP2")
+    @Test()
     void loginTest(){
-        LoginPage loginPage = welcomePage.navigateToLoginScreen();
-        MailBoxPage mailBoxPage = loginPage.login(LOGIN, PASSWORD);
-        Assertions.assertTrue(mailBoxPage.getUserLogo().isDisplayed());
+        LoginPage loginPage = homePage.goToLoginScreen();
+        WelcomeAccountPage accountPage = loginPage.login(LOGIN, PASSWORD);
+        assertEquals(accountPage.getAccountGreetingText(), ACCOUNT_WELCOME_TEXT);
     }
 }
